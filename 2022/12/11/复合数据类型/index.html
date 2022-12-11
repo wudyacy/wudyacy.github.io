@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=2.6.2" sizes="180x180"><link rel="mask-icon" href="/images/icons/stun-logo.svg?v=2.6.2" color="#54bcff"><meta name="description" content="写在前面       无论是哪一个编程语言，涉及到了数据结构，无非就是实现一个逻辑下的增，删，改，查四项功能。                     列表                           列表的建立       列表可以用a&#x3D;[]的形式来建立，也可以直接使用list()函数来建立一个列表，列表中元素不受到任何限制，可以是任意的数据类型，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="复合数据类型">
+<meta property="og:url" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:site_name" content="晨阳">
+<meta property="og:description" content="写在前面       无论是哪一个编程语言，涉及到了数据结构，无非就是实现一个逻辑下的增，删，改，查四项功能。                     列表                           列表的建立       列表可以用a&#x3D;[]的形式来建立，也可以直接使用list()函数来建立一个列表，列表中元素不受到任何限制，可以是任意的数据类型，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E7%B4%A2%E5%BC%95.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E5%A2%9E%E5%8A%A0.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E5%88%A0%E9%99%A4.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C1.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C2.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C3.png">
+<meta property="og:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C4.png">
+<meta property="article:published_time" content="2022-12-11T09:03:57.000Z">
+<meta property="article:modified_time" content="2022-12-11T10:05:22.369Z">
+<meta property="article:author" content="wudya">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E7%B4%A2%E5%BC%95.png"><title>复合数据类型 | 晨阳</title><link ref="canonical" href="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">晨阳</div><div class="header-banner-info__subtitle">花开堪折直须折,莫待无花空折枝</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">复合数据类型</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-12-11</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2022-12-11</span></span></div></header><div class="post-body">
+        <h3 id="写在前面">
+          <a href="#写在前面" class="heading-link"><i class="fas fa-link"></i></a><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3>
+      <p>无论是哪一个编程语言，涉及到了数据结构，无非就是实现一个逻辑下的增，删，改，查四项功能。</p>
+
+        <h2 id="列表">
+          <a href="#列表" class="heading-link"><i class="fas fa-link"></i></a><a href="#列表" class="headerlink" title="列表"></a>列表</h2>
+      
+        <h3 id="列表的建立">
+          <a href="#列表的建立" class="heading-link"><i class="fas fa-link"></i></a><a href="#列表的建立" class="headerlink" title="列表的建立"></a>列表的建立</h3>
+      <p>列表可以用a=[]的形式来建立，也可以直接使用list()函数来建立一个列表，列表中元素不受到任何限制，可以是任意的数据类型，列表中的数为一个序列，每个数据都对应一个索引下标。</p>
+
+        <h3 id="索引">
+          <a href="#索引" class="heading-link"><i class="fas fa-link"></i></a><a href="#索引" class="headerlink" title="索引"></a>索引</h3>
+      <p>列表索引分为正向和逆向，或是切片索引，一般由[start:end:step]来实现，也可以不规定来默认索引整个列表<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E7%B4%A2%E5%BC%95.png"></p>
+
+        <h3 id="元素的增加">
+          <a href="#元素的增加" class="heading-link"><i class="fas fa-link"></i></a><a href="#元素的增加" class="headerlink" title="元素的增加"></a>元素的增加</h3>
+      <p>1.append: 往列表尾部添加一个元素<br>2.extend：往列表尾部添加多个元素（可以添加一个列表）<br>3.insert：在指定位置加入元素（可以为一个列表）<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E5%A2%9E%E5%8A%A0.png"></p>
+
+        <h3 id="元素的删减">
+          <a href="#元素的删减" class="heading-link"><i class="fas fa-link"></i></a><a href="#元素的删减" class="headerlink" title="元素的删减"></a>元素的删减</h3>
+      <p>1.pop: 默认删除末尾元素，加入变量后删除索引n位置的元素。<br>2. remove：删除指定元素<br>3. clear: 清空元素<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%88%97%E8%A1%A8%E5%88%A0%E9%99%A4.png"></p>
+
+        <h3 id="总结">
+          <a href="#总结" class="heading-link"><i class="fas fa-link"></i></a><a href="#总结" class="headerlink" title="总结"></a>总结</h3>
+      <p>常用<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9B%BE%E7%89%872.png"></p>
+
+        <h2 id="元组">
+          <a href="#元组" class="heading-link"><i class="fas fa-link"></i></a><a href="#元组" class="headerlink" title="元组"></a>元组</h2>
+      <p>基础操作与列表相同，但是元组本身不能被改变，是一个常量的作用</p>
+
+        <h2 id="集合">
+          <a href="#集合" class="heading-link"><i class="fas fa-link"></i></a><a href="#集合" class="headerlink" title="集合"></a>集合</h2>
+      
+        <h3 id="集合的建立">
+          <a href="#集合的建立" class="heading-link"><i class="fas fa-link"></i></a><a href="#集合的建立" class="headerlink" title="集合的建立"></a>集合的建立</h3>
+      <p>集合是一个无序排序的，不重复的集合体，Python中两个集合建立方式{}或者函数建立set()，建立空集合一定要用set()<br>集合操作可以去重</p>
+
+        <h3 id="常用集合操作">
+          <a href="#常用集合操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#常用集合操作" class="headerlink" title="常用集合操作"></a>常用集合操作</h3>
+      <p>这些方式是由Python面向对象编程的方式给出<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%9B%BE%E7%89%871.png"><br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C.png"></p>
+
+        <h2 id="字典">
+          <a href="#字典" class="heading-link"><i class="fas fa-link"></i></a><a href="#字典" class="headerlink" title="字典"></a>字典</h2>
+      <p>字典的建立一般由dict()或者{}的形式来建立，对于一个字典单位，想要增加的其中的元素可以直接赋值键值的形式，本身的索引也是以键值来进行。<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%AD%97%E5%85%B8%E6%93%8D%E4%BD%9C" alt="操作形式"></p>
+
+        <h2 id="字符串">
+          <a href="#字符串" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2>
+      <p>个人觉得很重要的一种操作模式，Python中的字符串操作相比C/C++方便很多</p>
+
+        <h3 id="字符串的建立">
+          <a href="#字符串的建立" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串的建立" class="headerlink" title="字符串的建立"></a>字符串的建立</h3>
+      <p>str()可以直接建立字符串，而python中input函数的输入都是以字符串形式来处理的</p>
+
+        <h3 id="字符串的操作">
+          <a href="#字符串的操作" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串的操作" class="headerlink" title="字符串的操作"></a>字符串的操作</h3>
+      <p>假设以知字符串str<br>1.len(str):读取字符串长度<br>2.str.count(c):读取c在str中出现次数<br>3.eval(str):将字符串来当作python的语句来执行<br>4.str.find(str2): 查找str中是否出现子串str2，返回第一次出现的位置<br>5.str.split(c):以字符c来切分字符串，默认为空格<br>6.strip(): 去掉开头结尾的空格<br>7. join(): 相当于split的逆向操作</p>
+
+        <h2 id="几个序列操作函数">
+          <a href="#几个序列操作函数" class="heading-link"><i class="fas fa-link"></i></a><a href="#几个序列操作函数" class="headerlink" title="几个序列操作函数"></a>几个序列操作函数</h2>
+      <p>1.map(func,*iterables) :接收一个函数func和一个列表，把函数依次作用在列表每个元素中（此函数可以自己写）<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C1.png" alt="例子"><br>2.reduce(func,可迭代的对象[,可选初始值])：此函数的工作模式相当于递推，先将前两个值传入函数中，得出答案又和第三个数进行函数运算得出答案依次递推。返回一个单体值<br>3. filter(func or none,iterable): 此函数实现传入func函数对于迭代对象的过滤，返回一个可迭代对象。<br>4. zip(a,b):将多个列表或者元组对应位置组合为元组<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C2.png" alt="例子"><br>5. enumerate(): 将一个可迭代对象的元素返回枚举对象（加上他的下标）<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C3.png" alt="例子"></p>
+
+        <h2 id="列表推导式">
+          <a href="#列表推导式" class="heading-link"><i class="fas fa-link"></i></a><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h2>
+      <p>列表推导式功能为每个序列的值运用一个任意表达式收到一个新列表并返回<br><img src="/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C4.png" alt="例子"><br>由例子可以看出，列表推导式先给出我们需要的元素，然后后面的操作依次给出，操作顺序由左到右为Python中的编译顺序，最后得出需要的元素并且成为一个新的列表序列</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">wudya</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://example.com/2022/12/11/%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/Python/">Python</a></span></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2022/11/24/shanxijy/"><span class="paginator-prev__text">shanxijy</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">
+          写在前面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8"><span class="toc-number"></span> <span class="toc-text">
+          列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          列表的建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">2.</span> <span class="toc-text">
+          索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%A2%9E%E5%8A%A0"><span class="toc-number">3.</span> <span class="toc-text">
+          元素的增加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E7%9A%84%E5%88%A0%E5%87%8F"><span class="toc-number">4.</span> <span class="toc-text">
+          元素的删减</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">
+          总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-number"></span> <span class="toc-text">
+          元组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88"><span class="toc-number"></span> <span class="toc-text">
+          集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          集合的建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">
+          常用集合操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-number"></span> <span class="toc-text">
+          字典</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number"></span> <span class="toc-text">
+          字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          字符串的建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">
+          字符串的操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">
+          几个序列操作函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">
+          列表推导式</span></a></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svgstun-logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">晨阳</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">27</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">20</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">21</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2022</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>wudya</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
