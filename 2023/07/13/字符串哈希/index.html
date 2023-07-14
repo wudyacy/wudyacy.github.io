@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.6.2" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png?v=2.6.2" sizes="180x180"><link rel="mask-icon" href="/images/icons/stun-logo.svg?v=2.6.2" color="#54bcff"><meta name="description" content="定义       一个字符串映射到整数的函数f，这个f称为Hash函数。可以用这个函数进行比较。                     性质       具体来说，哈希函数最重要的性质可以概括为下面两条：1.在 Hash 函数值不一样的时候，两个字符串一定不一样；2.在 Hash 函数值一样的时候，两个字符串不一定一样（但有大概率一样，且我们当然希望它们总">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串哈希">
+<meta property="og:url" content="http://example.com/2023/07/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/index.html">
+<meta property="og:site_name" content="晨阳">
+<meta property="og:description" content="定义       一个字符串映射到整数的函数f，这个f称为Hash函数。可以用这个函数进行比较。                     性质       具体来说，哈希函数最重要的性质可以概括为下面两条：1.在 Hash 函数值不一样的时候，两个字符串一定不一样；2.在 Hash 函数值一样的时候，两个字符串不一定一样（但有大概率一样，且我们当然希望它们总">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-13T00:31:05.000Z">
+<meta property="article:modified_time" content="2023-07-13T07:33:25.729Z">
+<meta property="article:author" content="wudya">
+<meta property="article:tag" content="字符串">
+<meta name="twitter:card" content="summary"><title>字符串哈希 | 晨阳</title><link ref="canonical" href="http://example.com/2023/07/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.0.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">晨阳</div><div class="header-banner-info__subtitle">花开堪折直须折,莫待无花空折枝</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">字符串哈希</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2023-07-13</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2023-07-13</span></span></div></header><div class="post-body">
+        <h3 id="定义">
+          <a href="#定义" class="heading-link"><i class="fas fa-link"></i></a><a href="#定义" class="headerlink" title="定义"></a>定义</h3>
+      <p>一个字符串映射到整数的函数f，这个f称为Hash函数。可以用这个函数进行比较。</p>
+
+        <h3 id="性质">
+          <a href="#性质" class="heading-link"><i class="fas fa-link"></i></a><a href="#性质" class="headerlink" title="性质"></a>性质</h3>
+      <p>具体来说，哈希函数最重要的性质可以概括为下面两条：<br>1.在 Hash 函数值不一样的时候，两个字符串一定不一样；<br>2.在 Hash 函数值一样的时候，两个字符串不一定一样（但有大概率一样，且我们当然希望它们总是一样的）。<br>我们将 Hash 函数值一样但原字符串不一样的现象称为哈希碰撞。</p>
+
+        <h3 id="原理">
+          <a href="#原理" class="heading-link"><i class="fas fa-link"></i></a><a href="#原理" class="headerlink" title="原理"></a>原理</h3>
+      
+        <h4 id="定义多项式函数：">
+          <a href="#定义多项式函数：" class="heading-link"><i class="fas fa-link"></i></a><a href="#定义多项式函数：" class="headerlink" title="定义多项式函数："></a>定义多项式函数：</h4>
+      <p>利用$\displaystyle b$进制来定义函数</p>
+<p>1.$\displaystyle y=\sum_{i=1}^{\displaystyle l}s_{i}\times b^{l-i}(mod M)$；此时字符串xyz对应的哈希值为$\displaystyle x\times b^2 + y\times b+z$</p>
+<p>2.$\displaystyle y=\sum_{i=1}^{\displaystyle l}s_{i}\times b^{i-1}(mod M)$; 此时xyz对应的哈希值为$\displaystyle x+y\times b+z\times b^2$</p>
+<p>$\displaystyle b,M$的选择：$\displaystyle M$必须为一个大于字符串长度的素数，$b$可以任意选择但一般为$31$</p>
+
+        <h4 id="子串哈希">
+          <a href="#子串哈希" class="heading-link"><i class="fas fa-link"></i></a><a href="#子串哈希" class="headerlink" title="子串哈希"></a>子串哈希</h4>
+      <p>预先处理出所有的前缀哈希值，通过前缀和思想得到子串哈希 $f(s[l..r])=f_r(s)-f_{l-1}(s) \times b^{r-l+1}$</p>
+
+        <h3 id="运用">
+          <a href="#运用" class="heading-link"><i class="fas fa-link"></i></a><a href="#运用" class="headerlink" title="运用"></a>运用</h3>
+      
+        <h4 id="字符串匹配">
+          <a href="#字符串匹配" class="heading-link"><i class="fas fa-link"></i></a><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h4>
+      <p>求出模式串哈希值后，在匹配串里找到长度和模式串相同并且哈希值相同的子串</p>
+
+        <h4 id="最长公共字符串">
+          <a href="#最长公共字符串" class="heading-link"><i class="fas fa-link"></i></a><a href="#最长公共字符串" class="headerlink" title="最长公共字符串"></a>最长公共字符串</h4>
+      <p>问题：给定 $m$个总长不超过 $n$ 的非空字符串，查找所有字符串的最长公共子字符串，如果有多个，任意输出其中一个。其中 $1\leq m, n\leq 10^6$。</p>
+<p>很显然如果存在长度为 $k$ 的最长公共子字符串，那么$k-1$ 的公共子字符串也必定存在。因此我们可以二分最长公共子字符串的长度。假设现在的长度为 $k$，<code>check(k)</code> 的逻辑为我们将所有所有字符串的长度为 $k$ 的子串分别进行哈希，将哈希值放入 $n$ 个哈希表中存储。之后求交集即可。</p>
+<p>时间复杂度为 $O(n\log_2\frac{n}{m})$。</p>
+
+        <h4 id="模板">
+          <a href="#模板" class="heading-link"><i class="fas fa-link"></i></a><a href="#模板" class="headerlink" title="模板"></a>模板</h4>
+      <figure class="highlight c++"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> B = <span class="number">233</span>;<span class="comment">//131,31</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"><span class="function">vector&lt;ull&gt; <span class="title">p</span><span class="params">(N)</span></span>;</span><br><span class="line"><span class="function">vector&lt;ull&gt; <span class="title">h</span><span class="params">(N, <span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_hash</span><span class="params">(<span class="keyword">const</span> string&amp; s)</span> </span>&#123;</span><br><span class="line">  p[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    h[i + <span class="number">1</span>] = (h[i]*B%M+s[i]%M)%M;</span><br><span class="line">    p[i+<span class="number">1</span>]=p[i]*B%M;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">get</span><span class="params">(<span class="keyword">const</span> string&amp; str,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (h[r]%M-h[l<span class="number">-1</span>]*p[r-l+<span class="number">1</span>]%M+M)%M;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+
+
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">wudya</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2023/07/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/">http://example.com/2023/07/13/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%93%88%E5%B8%8C/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2023/07/13/KMP%E7%AE%97%E6%B3%95/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">KMP算法</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2023/06/27/%E7%A6%BB%E6%95%A3%E5%8C%96/"><span class="paginator-prev__text">离散化</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">
+          定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">2.</span> <span class="toc-text">
+          性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">
+          原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">
+          定义多项式函数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%90%E4%B8%B2%E5%93%88%E5%B8%8C"><span class="toc-number">3.2.</span> <span class="toc-text">
+          子串哈希</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">
+          运用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D"><span class="toc-number">4.1.</span> <span class="toc-text">
+          字符串匹配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">4.2.</span> <span class="toc-text">
+          最长公共字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.3.</span> <span class="toc-text">
+          模板</span></a></li></ol></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/icons/stun-logo.svgstun-logo.png" alt="avatar"></div><p class="sidebar-ov-author__text">晨阳</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">39</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">26</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">28</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2023</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>wudya</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.6.2</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script></body></html>
